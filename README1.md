@@ -1,1 +1,0 @@
-# HTML-Previewer-App-ASP.NET-C-Sharp-MVC
