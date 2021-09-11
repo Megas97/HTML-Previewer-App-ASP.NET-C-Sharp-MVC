@@ -22,3 +22,5 @@ Execute JavaScript Code When Value Of HTML <textarea> Changes Without Clicking O
 Submit Specific HTML Form Button When There Are Multiple Submit Buttons With JavaScript: https://stackoverflow.com/questions/26417038/using-javascript-to-submit-a-form-with-multiple-submit-buttons-as-a-user
 Autosave On Change Event Via JavaScript: https://stackoverflow.com/questions/20182433/autosave-on-change-event
 NVARCHAR(MAX) Size Limit: https://stackoverflow.com/questions/11131958/what-is-the-maximum-characters-for-the-nvarcharmax
+
+'Could not find a part of the path ... bin\roslyn\csc.exe' Error Fix: DO NOT Delete The 'roslyn' folder inside of the 'bin' folder!
