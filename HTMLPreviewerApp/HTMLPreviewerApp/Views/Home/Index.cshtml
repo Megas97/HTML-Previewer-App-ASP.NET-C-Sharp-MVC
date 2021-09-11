@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "HTML Previewer App";
+}
+
+<script type="text/javascript">
+    function insertTags(tag) {
+        var textArea = document.getElementById("HTMLCodeInput");
+        var errorMsg = document.getElementById("errorMessage");
+
+        // Define the selected text
+        var start = textArea.selectionStart;
+        var finish = textArea.selectionEnd;
+        if (start >= finish) {
+            errorMsg.innerHTML = "Please select part of the text!";
+            return;
+        }
+        var selectedText = textArea.value.substring(start, finish);
+        var firstTextPart = textArea.value.substring(0, start);
+        var lastTextPart = textArea.value.substring(finish, textArea.value.length);
+
+        // Putting the desired tag
+        var formattedText = "";
+        var tags = new Array("strong", "em", "u", "sup", "sub");
+        if (tags.includes(tag)) {
+            formattedText = "<" + tag + ">" + selectedText + "</" + tag + ">";
+        } else if (tag == "link") {
+            var linkInputElement = document.getElementById("linkInput");
+            var linkInputFieldValue = linkInputElement.value;
+
+            // Autocorrection and check for validity of the link
+            if (linkInputFieldValue == "") {
+                errorMsg.innerHTML = "Please input a web address!";
+                return;
+            }
+            if (validateWEBaddress(linkInputFieldValue) == false) {
+                errorMsg.innerHTML = "Invalid web address!";
+                return;
+            }
+            linkInputFieldValue = validateWEBaddress(linkInputFieldValue);
+            formattedText = '<a href="' + linkInputFieldValue + '" target="_blank">' + selectedText + '</a>';
+        }
+        var newTextValue = firstTextPart + formattedText + lastTextPart;
+
+        // Check if HTML is valid
+        // https://stackoverflow.com/questions/10026626/check-if-html-snippet-is-valid-with-javascript
+        if (checkHTML(newTextValue)) {
+            textArea.value = newTextValue;
+            errorMsg.innerHTML = "&nbsp;";
+        } else {
+            errorMsg.innerHTML = "Invalid selection!";
+        }
+
+        autoSave();
+    }
+
+    function checkHTML(html) {
+        var doc = document.createElement("div");
+        doc.innerHTML = html;
+        return (doc.innerHTML === html);
+    }
+
+    function removeTags() {
+        var textArea = document.getElementById("HTMLCodeInput");
+        var errorMsg = document.getElementById("errorMessage");
+
+        // Remove all tags from text
+        var text = textArea.value;
+        var tmp = document.createElement("div");
+        tmp.innerHTML = text;
+        textArea.value = tmp.textContent || tmp.innerText || "";
+
+        errorMsg.innerHTML = "&nbsp;";
+
+        autoSave();
+    }
+
+    function validateWEBaddress(w) {
+	    var fixedLink = w.trim();
+        var returnValue;
+
+	    // Automatic correction
+        if (!fixedLink.startsWith("http://") && !fixedLink.startsWith("https://")) {
+            fixedLink = "http://" + fixedLink;
+        }
+        returnValue = encodeURI(fixedLink);
+
+	    // Check
+        // Use 'at' symbol in MVC Razor page: https://stackoverflow.com/questions/56520980/how-to-use-symbol-in-jquery-in-mvc
+	    var webPattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@('@')!\$&'\(\)\*\+,;=.]+$/;
+	    var diff = fixedLink.replace(webPattern, "");
+        if (diff != "" && diff != undefined) {
+            returnValue = false;
+        }
+	    return returnValue;
+    }
+
+    function resetErrorMessage() {
+        document.getElementById("errorMessage").innerHTML = "&nbsp;";
+    }
+
+    var autosave_timer = null;
+    function autoSave() {
+        if (autosave_timer) {
+            clearTimeout(autosave_timer);
+        }
+        autosave_timer = setTimeout(function () { document.forms[0].saveButton.click(); }, 10000);
+    }
+</script>
+
+<br /><br />
+<div class="container text-success" style="text-align: center;">
+    @(ViewData["EditMessage"])&nbsp;
+</div>
+<br />
+<div class="container text-success" style="text-align: center;">
+    @(ViewData["Message"])&nbsp;
+</div>
+
+<div class="wrapper">
+    <div class="inner__wrapper">
+        <center>
+            @using (Html.BeginForm("ProcessFormSubmit", "Home", FormMethod.Post))
+            {
+            <input type="hidden" id="HTMLCodeID" name="HTMLCodeID" value="@ViewData["HTMLCodeID"]">
+            <br />
+            <div class="form-group">
+                <div id="errorMessage" class="text-success">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <label>Please input your HTML code below:</label>
+                <br />
+                <div class="form-group">
+                    <input type="button" value="Bold" style="width: 50px; text-align: center;" onclick="insertTags('strong')" />
+                    <input type="button" value="Italic" style="width: 50px; text-align: center;" onclick="insertTags('em')" />
+                    <input type="button" value="Underline" style="width: 80px; text-align: center;" onclick="insertTags('u')" />
+                    <input type="button" value="Superscript" style="width: 90px; text-align: center;" onclick="insertTags('sup')" />
+                    <input type="button" value="Subscript" style="width: 90px; text-align: center;" onclick="insertTags('sub')" />
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Link" style="width: 50px; text-align: center;" onclick="insertTags('link')" />
+                    <input type="text" id="linkInput" placeholder="Please enter a link here" style="width: 300px; text-align: left;" />
+                    <input type="reset" value="Reset" style="width: 50px; text-align: center;" onclick="resetErrorMessage()" />
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Remove Tags" style="width: 100px; text-align: center;" onclick="removeTags()" />
+                </div>
+                <textarea id="HTMLCodeInput" name="HTMLCodeInput" rows="25" cols="70" maxlength="1000" onkeyup="autoSave()" style="resize: none; width: 511px; height: 506px; border: 1px solid black;">@ViewData["HTMLCodeInput"]</textarea>
+                <br /><br />
+                <div class="form-group">
+                    <input type="submit" id="previewButton" name="previewButton" value="Preview HTML" class="btn btn-info" />
+                    <input type="submit" id="checkButton" name="checkButton" value="Check HTML" class="btn btn-warning" />
+                    <input type="submit" id="saveButton" name="saveButton" value="Save HTML" class="btn btn-success" />
+                </div>
+            </div>
+            }
+        </center>
+    </div>
+    <div class="inner__wrapper" style="margin-top: 92px;">
+        <center>
+            <label>Press the 'Preview HTML' button to see your HTML code in action.</label>
+            <label>A preview will be shown below:</label>
+            <div style="width: 511px; height: 506px; margin-top: 62px; border: 1px solid black; text-align: left; white-space: pre-wrap;">
+                <p style="margin-left: 2px; margin-top: -38px;">@Html.Raw(ViewData["HTMLCodePreview"])</p>
+            </div>
+            @if (ViewData["CreatedOn"] != null)
+            {
+                <br />
+                <label>Created on: @ViewData["CreatedOn"]</label>
+            }
+            @if (ViewData["LastModified"] != null)
+            {
+                <br />
+                <label>Last modified: @ViewData["LastModified"]</label>
+            }
+        </center>
+    </div>
+</div>
