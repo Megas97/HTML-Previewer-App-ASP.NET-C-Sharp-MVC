@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="HTMLCode">
+      <EntityTypeMapping TypeName="DatabaseModel.HTMLCode">
+        <MappingFragment StoreEntitySet="HTMLCode">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="html" ColumnName="html" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="edited" ColumnName="edited" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
