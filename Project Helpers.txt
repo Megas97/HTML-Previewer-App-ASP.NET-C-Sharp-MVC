@@ -1,0 +1,24 @@
+Store HTML String Into Database: https://forums.asp.net/t/2142922.aspx?Good+idea+to+save+large+amounts+of+text+in+db+
+Change <textarea> Width: https://forums.asp.net/t/2138464.aspx?Cannot+change+the+textarea+width+
+Render HTML Code In <div>: https://stackoverflow.com/questions/4705848/rendering-html-inside-textarea
+Multiple <submit> Buttons In HTML <form>: https://stackoverflow.com/questions/442704/how-do-you-handle-multiple-submit-buttons-in-asp-net-mvc-framework
+Determine Which Submit Button Was Pressed: https://stackoverflow.com/questions/19042751/how-can-i-check-which-submit-button-was-pressed
+Get HTML Elements In C# Code: https://stackoverflow.com/questions/21303236/mvc-razor-get-option-value-from-select-with-formcollection
+Display Formatted HTML In Razor View: https://forums.asp.net/t/2004322.aspx?Displaying+HTML+String+from+Model+in+MVC+Razor+View
+Whitespace In Bytes: https://coderanch.com/t/3589/spaces-memory
+Get Length Of StreamReader: https://stackoverflow.com/questions/14637517/get-length-of-streamreader
+Create Temporary Files: https://improveandrepeat.com/2019/10/working-with-temporary-files-in-net/
+Get Current DateTime: https://stackoverflow.com/questions/13355638/get-the-current-date-and-time
+'Cannot insert explicit value for identity column in table when IDENTITY_INSERT is set to OFF' Error Fix: https://stackoverflow.com/questions/11173562/entity-framework-error-cannot-insert-explicit-value-for-identity-column-in-tabl
+Bootstrap Buttons: https://getbootstrap.com/docs/4.0/components/buttons/
+Center Bootstrap Navbar Title: https://stackoverflow.com/questions/43497560/center-bootstrap-navbar-title
+Preserve Line Breaks In HTML <textarea>: https://stackoverflow.com/questions/40417527/how-do-i-preserve-line-breaks-when-getting-text-from-a-textarea
+Set ViewBag Before Redirect (Use TempData) : https://stackoverflow.com/questions/14497711/set-viewbag-before-redirect
+Pass Optional Parameter To ActionResult: https://stackoverflow.com/questions/12470332/how-to-pass-a-optional-parameter-into-actionresult
+RedirectToAction With Parameter: https://stackoverflow.com/questions/1257482/redirecttoaction-with-parameter
+Create Custom URLs: https://dotnettutorials.net/lesson/custom-routing-asp-dot-net-mvc/
+Encode & Decode Base64 String: https://stackoverflow.com/questions/11743160/how-do-i-encode-and-decode-a-base64-string
+Execute JavaScript Code When Value Of HTML <textarea> Changes Without Clicking Outside Of It: https://stackoverflow.com/questions/25976564/onkeyup-event-in-textarea
+Submit Specific HTML Form Button When There Are Multiple Submit Buttons With JavaScript: https://stackoverflow.com/questions/26417038/using-javascript-to-submit-a-form-with-multiple-submit-buttons-as-a-user
+Autosave On Change Event Via JavaScript: https://stackoverflow.com/questions/20182433/autosave-on-change-event
+NVARCHAR(MAX) Size Limit: https://stackoverflow.com/questions/11131958/what-is-the-maximum-characters-for-the-nvarcharmax
